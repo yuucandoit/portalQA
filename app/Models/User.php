@@ -23,6 +23,7 @@ class User extends Authenticatable
         'email',
         'password',
         'status',
+        'role',
         'gemini_api_key',
         'openrouter_api_key',
         'openrouter_model',
@@ -58,6 +59,29 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * Check if the user is an Administrator
+     */
+    public function isAdmin(): bool
+    {
+        return strtolower($this->role ?? 'member') === 'admin';
+    }
+
+    /**
+     * Scope a query to search users by name or email
+     */
+    public function scopeSearch($query, ?string $term)
+    {
+        if (empty($term)) {
+            return $query;
+        }
+
+        return $query->where(function ($q) use ($term) {
+            $q->where('name', 'like', "%{$term}%")
+              ->orWhere('email', 'like', "%{$term}%");
+        });
     }
 
     /**

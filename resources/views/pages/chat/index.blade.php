@@ -716,6 +716,11 @@
     const ACTIVE_CHANNEL_ID = {{ $activeChannel ? $activeChannel->id : 'null' }};
     const ACTIVE_CHANNEL_SLUG = "{{ $activeChannel ? $activeChannel->slug : '' }}";
     const CSRF_TOKEN = "{{ csrf_token() }}";
+    @php
+        $isHttps = request()->isSecure() || request()->header('X-Forwarded-Proto') === 'https' || str_starts_with(config('app.url', ''), 'https://');
+        $defaultWsUrl = $isHttps ? 'wss://' . request()->getHost() . '/ws' : (env('CHAT_WS_URL') ?: '');
+    @endphp
+    window.WS_URL = @json($defaultWsUrl);
     const WS_PORT = {{ $wsPort }};
     const CHANNEL_MEMBERS = @json($channelMembers ?? []);
     const ALL_TEAM_USERS = @json($allUsers ?? []);

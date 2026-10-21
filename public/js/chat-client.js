@@ -58,8 +58,11 @@
         const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
         const host = window.location.hostname || '127.0.0.1';
         let wsUrl;
-        if (typeof WS_URL !== 'undefined' && WS_URL) {
-            wsUrl = WS_URL;
+        if (typeof window.WS_URL !== 'undefined' && window.WS_URL) {
+            wsUrl = window.WS_URL;
+        } else if (protocol === 'wss:' || (host !== 'localhost' && host !== '127.0.0.1')) {
+            // Over HTTPS or on remote domain, always connect via Nginx reverse proxy /ws endpoint
+            wsUrl = `${protocol}//${host}/ws`;
         } else if (!wsPort || wsPort === 443 || wsPort === '443' || wsPort === '0' || wsPort === 0) {
             wsUrl = `${protocol}//${host}/ws`;
         } else {

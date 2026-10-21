@@ -19,30 +19,35 @@ class UserSeeder extends Seeder
                 'email' => 'chandra@gmail.com',
                 'password' => Hash::make('password'),
                 'status' => 'Active',
+                'role' => 'member',
             ],
              [
                 'name' => 'Syahril Prasetyo',
                 'email' => 'syahril@gmail.com',
                 'password' => Hash::make('password'),
                 'status' => 'Active',
+                'role' => 'member',
             ],
             [
                 'name' => 'Abdul Alem',
                 'email' => 'alem@gmail.com',
                 'password' => Hash::make('password'),
                 'status' => 'Active',
+                'role' => 'member',
             ],
             [
                 'name' => 'Luthfi Rachman',
                 'email' => 'luthfi@gmail.com',
                 'password' => Hash::make('password'),
                 'status' => 'Active',
+                'role' => 'member',
             ],
             [
                 'name' => 'Wahyu Sanjaya',
                 'email' => 'wahyu@gmail.com',
                 'password' => Hash::make('password'),
                 'status' => 'Active',
+                'role' => 'admin',
             ],
         ];
 

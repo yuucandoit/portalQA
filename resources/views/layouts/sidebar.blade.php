@@ -75,6 +75,15 @@
             <span>Help & Support</span>
         </a>
 
+        @if(Auth::check() && Auth::user()->isAdmin())
+            <div class="menu-label" style="margin-top: 24px;">ADMINISTRATION</div>
+            <a href="{{ route('admin.users.index') }}" class="menu-item {{ request()->routeIs('admin.users.*') || request()->routeIs('users.*') ? 'active' : '' }}">
+                <i class="fas fa-users-cog" style="color: #818cf8;"></i>
+                <span>User Management</span>
+                <span class="badge" style="background: linear-gradient(135deg, #6366f1, #8b5cf6); color: white; font-weight: 700; font-size: 11px;">Admin</span>
+            </a>
+        @endif
+
         <!-- PWA Install Sidebar Button -->
         <div class="sidebar-pwa-wrap pwa-install-trigger" style="display: none; padding: 10px 14px; margin-top: 14px;">
             <button type="button" class="btn-sidebar-pwa-install" onclick="window.triggerPwaInstall()">
@@ -101,7 +110,10 @@
                 <div class="user-avatar">{{ $initials }}</div>
                 <div class="user-info">
                     <div class="name" title="{{ Auth::user()->name }}">{{ Str::limit(Auth::user()->name, 16) }}</div>
-                    <div class="role">QA Member</div>
+                    <div class="role" style="{{ Auth::user()->isAdmin() ? 'color: #a78bfa; font-weight: 600;' : '' }}">
+                        <i class="{{ Auth::user()->isAdmin() ? 'fas fa-shield-alt text-purple-400' : 'fas fa-user' }}" style="font-size: 10px; margin-right: 3px;"></i>
+                        {{ Auth::user()->isAdmin() ? 'Administrator' : 'QA Member' }}
+                    </div>
                 </div>
                 <button class="logout-btn" title="Logout" onclick="event.preventDefault(); document.getElementById('sidebar-logout-form').submit();">
                     <i class="fas fa-sign-out-alt"></i>

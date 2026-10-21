@@ -1069,6 +1069,11 @@
     <script>
         window.CURRENT_USER_ID = {{ Auth::id() }};
         window.CURRENT_USER_NAME = "{{ addslashes(Auth::user()->name) }}";
+        @php
+            $isHttps = request()->isSecure() || request()->header('X-Forwarded-Proto') === 'https' || str_starts_with(config('app.url', ''), 'https://');
+            $defaultWsUrl = $isHttps ? 'wss://' . request()->getHost() . '/ws' : (env('CHAT_WS_URL') ?: '');
+        @endphp
+        window.WS_URL = @json($defaultWsUrl);
         window.WS_PORT = {{ config('services.chat.ws_port', env('CHAT_WS_PORT', 6001)) }};
     </script>
     <script src="{{ asset('js/chat-notifier.js') }}"></script>
