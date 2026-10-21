@@ -70,9 +70,13 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
         opcache \
         intl
 
+# Create runtime directories
+RUN mkdir -p /run/nginx /var/log/nginx /var/log/supervisor /etc/supervisor/conf.d
+
 # Copy configuration files
 COPY docker/php.ini /usr/local/etc/php/conf.d/custom.ini
 COPY docker/nginx.conf /etc/nginx/http.d/default.conf
+COPY docker/supervisord.conf /etc/supervisord.conf
 COPY docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY docker/entrypoint.sh /usr/local/bin/entrypoint.sh
 
@@ -100,5 +104,5 @@ EXPOSE 80 6001
 # Entrypoint script handles migrations, key, and starts supervisor
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
 
