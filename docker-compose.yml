@@ -1,0 +1,60 @@
+services:
+  # ============================================================================
+  # QA Portal - Main Application Container (Laravel 13 + PHP 8.3 + Nginx + WS)
+  # ============================================================================
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: qaportal_app
+    restart: unless-stopped
+    ports:
+      # HTTP port mapped to host (default: 8000, can be reversed-proxied by host Nginx)
+      - "${APP_PORT:-8000}:80"
+      # Real-Time WebSocket port mapped to host (default: 6001)
+      - "${CHAT_WS_PORT:-6001}:6001"
+    env_file:
+      - .env
+    environment:
+      - APP_ENV=${APP_ENV:-production}
+      - APP_DEBUG=${APP_DEBUG:-false}
+      - APP_URL=${APP_URL:-http://localhost:8000}
+      - DB_CONNECTION=${DB_CONNECTION:-sqlite}
+      - DB_DATABASE=${DB_DATABASE:-/var/www/html/database/database.sqlite}
+      - CHAT_WS_PORT=${CHAT_WS_PORT:-6001}
+      - CHAT_WS_HOST=0.0.0.0
+    volumes:
+      # 1. Persist SQLite database across container restarts and updates
+      - qaportal_data:/var/www/html/database
+      # 2. Persist user uploads, chat attachments, avatars, and voice notes
+      - qaportal_storage:/var/www/html/storage/app
+      # 3. Persist application error and access logs
+      - qaportal_logs:/var/www/html/storage/logs
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://127.0.0.1/offline || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+    networks:
+      - qaportal_network
+
+# ==============================================================================
+# Persistent Volumes (Data is safely preserved when rebuilding containers)
+# ==============================================================================
+volumes:
+  qaportal_data:
+    name: qaportal_database_volume
+  qaportal_storage:
+    name: qaportal_storage_volume
+  qaportal_logs:
+    name: qaportal_logs_volume
+
+# ==============================================================================
+# Internal Docker Network
+# ==============================================================================
+networks:
+  qaportal_network:
+    name: qaportal_net
+    driver: bridge
+
