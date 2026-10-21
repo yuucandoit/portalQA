@@ -29,9 +29,9 @@ RUN composer install \
     --ignore-platform-reqs
 
 # ==============================================================================
-# Stage 3: Production Runtime (PHP 8.3 + FPM + Nginx + Node.js + Supervisor)
+# Stage 3: Production Runtime (PHP 8.4 + FPM + Nginx + Node.js + Supervisor)
 # ==============================================================================
-FROM php:8.3-fpm-alpine
+FROM php:8.4-fpm-alpine
 
 LABEL maintainer="QA Portal Team"
 LABEL description="QA Portal with Real-Time Team Chat, Bug Tracker, and PWA Support"
