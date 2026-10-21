@@ -739,6 +739,7 @@
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Accept': 'application/json',
                 'X-CSRF-TOKEN': csrfToken,
                 'X-Requested-With': 'XMLHttpRequest'
             }
@@ -859,6 +860,7 @@
         fetch(`/chat/channels/${activeChannelId}/messages`, {
             method: 'POST',
             headers: {
+                'Accept': 'application/json',
                 'X-CSRF-TOKEN': csrfToken,
                 'X-Requested-With': 'XMLHttpRequest'
             },
@@ -1263,6 +1265,7 @@
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
+                        'Accept': 'application/json',
                         'X-CSRF-TOKEN': csrfToken,
                         'X-Requested-With': 'XMLHttpRequest'
                     },
@@ -1340,7 +1343,10 @@
         if (repliesList) repliesList.innerHTML = '';
 
         fetch(`/chat/channels/${activeChannelId}/thread/${messageId}`, {
-            headers: { 'X-Requested-With': 'XMLHttpRequest' }
+            headers: {
+                'Accept': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest'
+            }
         })
             .then(res => res.json())
             .then(res => {
@@ -1503,6 +1509,7 @@
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Accept': 'application/json',
                 'X-CSRF-TOKEN': csrfToken,
                 'X-Requested-With': 'XMLHttpRequest'
             }
@@ -1640,6 +1647,7 @@
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Accept': 'application/json',
                 'X-CSRF-TOKEN': csrfToken,
                 'X-Requested-With': 'XMLHttpRequest'
             },
@@ -1739,6 +1747,7 @@
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Accept': 'application/json',
                 'X-CSRF-TOKEN': csrfToken,
                 'X-Requested-With': 'XMLHttpRequest'
             },
@@ -1762,6 +1771,7 @@
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
+                'Accept': 'application/json',
                 'X-CSRF-TOKEN': csrfToken,
                 'X-Requested-With': 'XMLHttpRequest'
             }
@@ -1827,7 +1837,10 @@
             });
 
             fetch(`/chat/channels/${activeChannelId}/search?${params.toString()}`, {
-                headers: { 'X-Requested-With': 'XMLHttpRequest' }
+                headers: {
+                    'Accept': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
             })
                 .then(r => r.json())
                 .then(res => {
@@ -1916,6 +1929,7 @@
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Accept': 'application/json',
                 'X-CSRF-TOKEN': csrfToken,
                 'X-Requested-With': 'XMLHttpRequest'
             },
@@ -1927,17 +1941,28 @@
                 member_ids: memberIds
             })
         })
-            .then(r => r.json())
+            .then(async r => {
+                const text = await r.text();
+                let res;
+                try {
+                    res = JSON.parse(text);
+                } catch (e) {
+                    throw new Error('Respon server tidak valid (' + r.status + ')');
+                }
+                if (!r.ok || !res.success) {
+                    const errorMsg = res.message || (res.errors ? Object.values(res.errors).flat().join('\n') : 'Gagal membuat ruang obrolan.');
+                    throw new Error(errorMsg);
+                }
+                return res;
+            })
             .then(res => {
-                if (res.success && res.redirect) {
+                if (res.redirect) {
                     window.location.href = res.redirect;
-                } else {
-                    alert(res.message || 'Gagal membuat ruang obrolan.');
                 }
             })
             .catch(err => {
                 console.error('[Create Channel Error]', err);
-                alert('Terjadi kesalahan saat membuat channel.');
+                alert(err.message || 'Terjadi kesalahan saat membuat channel.');
             })
             .finally(() => {
                 if (btn) btn.disabled = false;

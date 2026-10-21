@@ -214,7 +214,7 @@ class ChatController extends Controller
             'creator' => $user->name,
         ]);
 
-        if ($request->wantsJson()) {
+        if ($request->expectsJson() || $request->ajax() || $request->wantsJson()) {
             return response()->json([
                 'success' => true,
                 'channel' => $channel,
@@ -258,7 +258,7 @@ class ChatController extends Controller
             });
         }
 
-        if ($request->wantsJson()) {
+        if ($request->expectsJson() || $request->ajax() || $request->wantsJson()) {
             return response()->json([
                 'success' => true,
                 'slug'    => $channel->slug,
