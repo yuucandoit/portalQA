@@ -14,6 +14,7 @@ storage/framework/sessions/*
 storage/framework/views/*
 storage/app/public/chat_files/*
 bootstrap/cache/*.php
+public/hot
 tests
 phpunit.xml
 .DS_Store

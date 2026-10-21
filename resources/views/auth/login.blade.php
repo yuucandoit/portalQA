@@ -701,6 +701,7 @@
                             value="{{ old('email') }}"
                             class="@error('email') error is-invalid @enderror"
                             required
+                            autocomplete="email"
                             autofocus
                         />
                         <i class="fas fa-envelope input-icon"></i>
@@ -731,6 +732,7 @@
                             placeholder="Enter your password" 
                             class="@error('password') error is-invalid @enderror"
                             required
+                            autocomplete="current-password"
                         />
                         <i class="fas fa-lock input-icon"></i>
                         <button type="button" class="toggle-password" id="togglePassword" title="Toggle password visibility">
