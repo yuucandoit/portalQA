@@ -85,6 +85,9 @@ RUN chmod +x /usr/local/bin/entrypoint.sh
 # Copy application source code
 COPY . /var/www/html
 
+# Backup database code templates (migrations & seeders) so persistent volume on /var/www/html/database does not shadow them
+RUN cp -a /var/www/html/database /var/www/html/database_src
+
 # Clean any copied local cache files
 RUN rm -f /var/www/html/bootstrap/cache/*.php
 

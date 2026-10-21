@@ -23,6 +23,15 @@ if [ ! -f /var/www/html/.env ]; then
     fi
 fi
 
+# 2.5 Ensure migrations and seeders are always up-to-date even if /var/www/html/database is a mounted volume
+if [ -d /var/www/html/database_src/migrations ]; then
+    echo "--> Syncing latest database migrations and seeders from image..."
+    mkdir -p /var/www/html/database/migrations /var/www/html/database/seeders /var/www/html/database/factories
+    cp -f /var/www/html/database_src/migrations/* /var/www/html/database/migrations/ 2>/dev/null || true
+    cp -f /var/www/html/database_src/seeders/* /var/www/html/database/seeders/ 2>/dev/null || true
+    cp -f /var/www/html/database_src/factories/* /var/www/html/database/factories/ 2>/dev/null || true
+fi
+
 # 3. SQLite Database Preparation
 DB_CONN=$(grep -E "^DB_CONNECTION=" /var/www/html/.env 2>/dev/null | cut -d '=' -f2 | tr -d ' ' || echo "sqlite")
 if [ "$DB_CONN" = "sqlite" ] || [ -z "$DB_CONN" ]; then
