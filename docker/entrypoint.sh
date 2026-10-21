@@ -61,7 +61,14 @@ php artisan storage:link --force || true
 echo "--> Running database migrations..."
 php artisan migrate --force || echo "--> [Notice] Migrations finished with warning, continuing..."
 
-# 8. Clear and optimize cache
+# 8. Run initial database seeders if database has no users yet
+USER_COUNT=$(php artisan tinker --execute="echo App\Models\User::count();" 2>/dev/null || echo "0")
+if [ "$USER_COUNT" = "0" ] || [ -z "$USER_COUNT" ]; then
+    echo "--> Database is empty. Running initial database seeders (Users & Default Channels)..."
+    php artisan db:seed --force || true
+fi
+
+# 9. Clear and optimize cache
 echo "--> Optimizing configuration and view cache..."
 php artisan config:clear || true
 php artisan route:clear || true

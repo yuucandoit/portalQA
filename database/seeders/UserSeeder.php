@@ -20,9 +20,15 @@ class UserSeeder extends Seeder
                 'password' => Hash::make('password'),
                 'status' => 'Active',
             ],
+             [
+                'name' => 'Syahril Prasetyo',
+                'email' => 'syahril@gmail.com',
+                'password' => Hash::make('password'),
+                'status' => 'Active',
+            ],
             [
                 'name' => 'Abdul Alem',
-                'email' => 'abdul@gmail.com',
+                'email' => 'alem@gmail.com',
                 'password' => Hash::make('password'),
                 'status' => 'Active',
             ],
