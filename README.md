@@ -1,58 +1,224 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# QA Portal - Quality Assurance Management System
 
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+  <img src="https://img.shields.io/badge/Laravel-13.x-FF2D20?style=for-the-badge&logo=laravel&logoColor=white" alt="Laravel 13" />
+  <img src="https://img.shields.io/badge/PHP-8.4-777BB4?style=for-the-badge&logo=php&logoColor=white" alt="PHP 8.4" />
+  <img src="https://img.shields.io/badge/Node.js-20.x-339933?style=for-the-badge&logo=node.js&logoColor=white" alt="Node.js 20" />
+  <img src="https://img.shields.io/badge/Docker-Ready-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker" />
+  <img src="https://img.shields.io/badge/PWA-Enabled-5A0FC8?style=for-the-badge&logo=pwa&logoColor=white" alt="PWA" />
+  <img src="https://img.shields.io/badge/WebSocket-Real--Time-010101?style=for-the-badge&logo=socketdotio&logoColor=white" alt="WebSocket" />
 </p>
 
-## About Laravel
+**QA Portal** adalah platform kolaborasi dan manajemen pengujian perangkat lunak (*Quality Assurance*) modern yang dirancang untuk mempercepat alur kerja pengujian tim, pelacakan bug terstandarisasi, komunikasi real-time, serta pelaporan berbasis kecerdasan buatan (AI).
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 🚀 Fitur Unggulan
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 1. 📋 Test Case & Test Report Management
+* **Hierarki Pengujian Terstruktur:** Kelola proyek, test report, test suite, dan detail test case dengan langkah pengujian (*test steps*), data uji (*test data*), dan hasil yang diharapkan (*expected result*).
+* **Eksekusi Pengujian & Bulk Actions:** Eksekusi status massal (Pass, Fail, Blocked, Skipped) dengan satu klik.
+* **Import & Export:** Template CSV impor cepat dan ekspor laporan lengkap ke format Excel (*Spreadsheet*) & CSV.
+* **AI Review & Auto-Generate:** Buat dan perbaiki skenario test case secara otomatis menggunakan integrasi AI.
 
-## Learning Laravel
+### 2. 🐛 Bug Tracking System (QA-TPL-001)
+* **Pelaporan Standar Industri:** Pelacakan bug terperinci dengan klasifikasi severity (Critical, Major, Minor, Trivial) dan priority (P1 - P4).
+* **Quick-Bug Modal:** Input bug secara instan dari halaman mana saja tanpa berpindah konteks.
+* **Siklus Hidup Bug Lengkap:** Alur kerja status *Open*, *In Progress*, *Resolved*, *Reopen*, *Ready to Retest*, hingga *Closed*.
+* **Bukti Pengujian:** Lampirkan tangkapan layar, log error, dan langkah-langkah reproduksi bug.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### 3. 💬 Real-Time Team Collaboration & Chat
+* **WebSocket Engine Cepat:** Ditenagai server Node.js mandiri (`chat-server.cjs`) dengan koneksi persisten tanpa jeda (*zero polling*).
+* **Multi-Channel & Direct Messages:** Dukungan channel publik, grup privat, dan percakapan langsung 1-on-1.
+* **Fitur Kolaborasi Lengkap:** Slack-style thread replies, pin pesan penting, reaksi emoji, pengiriman dokumen/gambar, dan perekam voice note langsung di browser.
+* **Global Push Notifier:** Notifikasi desktop dan pembaruan badge unread otomatis di seluruh halaman portal.
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 4. 🤖 AI Daily Standup & Assistant
+* **Otomasi Daily Standup:** Rangkum aktivitas pengujian, test case yang diselesaikan, dan temuan bug harian secara otomatis menjadi format standup siap kirim.
+* **Multi-Provider AI:** Konfigurasi fleksibel mendukung **Google Gemini**, **OpenAI**, **OpenRouter**, **OmniRoute**, dan **Ollama** lokal.
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+### 5. 👥 User & Access Management (RBAC)
+* **Kontrol Akses Berbasis Peran:** Pemisahan hak akses antara **Administrator** dan **QA Member**.
+* **Panel Manajemen Pengguna:** Khusus admin untuk menambah anggota tim baru, mengubah role admin/member, mengaktifkan/menonaktifkan akun, dan reset password.
+* **Keamanan Akun:** Proteksi pencegahan penguncian mandiri (*self-demotion & self-deletion guard*).
 
-## Agentic Development
+### 6. 📱 Progressive Web App (PWA)
+* **Instalasi Mandiri:** Dapat diinstal langsung di perangkat Mobile (Android/iOS) dan Desktop (macOS/Windows) layaknya aplikasi native.
+* **Offline Fallback:** Tampilan ramah pengguna saat koneksi internet terputus.
+* **Mobile-First Bottom Navigation:** Bilah navigasi bawah yang responsif untuk kenyamanan penggunaan di smartphone.
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+---
 
+## 🛠️ Arsitektur & Teknologi
+
+* **Backend Framework:** [Laravel 13](https://laravel.com/)
+* **Bahasa Pemrograman:** [PHP 8.4-FPM](https://www.php.net/)
+* **Real-Time Engine:** [Node.js 20](https://nodejs.org/) + `ws` library
+* **Frontend:** Blade Templating, [Tailwind CSS](https://tailwindcss.com/), [Vite 8](https://vitejs.dev/)
+* **Basis Data:** SQLite (Default, Zero-Config) / MySQL / PostgreSQL
+* **Containerization:** Docker Multi-Stage Build + Supervisord (PHP-FPM, Nginx, Node.js Chat Server, Laravel Worker)
+
+---
+
+## ⚡ Panduan Instalasi Lokal
+
+### Prasyarat
+* PHP 8.4 atau lebih baru (dengan ekstensi `pdo_sqlite`, `mbstring`, `gd`, `zip`, `intl`, `bcmath`)
+* Composer 2+
+* Node.js 20+ & npm
+
+### Langkah Instalasi
+
+1. **Clone repositori:**
+   ```bash
+   git clone https://github.com/yuucandoit/portalQA.git
+   cd portalQA
+   ```
+
+2. **Install dependensi PHP & Node.js:**
+   ```bash
+   composer install
+   npm install
+   ```
+
+3. **Setup environment:**
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
+
+4. **Migrasi database dan seed akun default:**
+   ```bash
+   touch database/database.sqlite
+   php artisan migrate --seed
+   ```
+
+5. **Build asset frontend:**
+   ```bash
+   npm run build
+   ```
+
+6. **Jalankan aplikasi (2 Terminal):**
+   * **Terminal 1 (Laravel Server):**
+     ```bash
+     php artisan serve --port=8000
+     ```
+   * **Terminal 2 (WebSocket Chat Server):**
+     ```bash
+     npm run chat
+     # atau: node chat-server.cjs
+     ```
+
+Buka browser Anda di `http://127.0.0.1:8000`.
+
+---
+
+## 🐳 Deployment Menggunakan Docker (Ubuntu Server)
+
+QA Portal telah dilengkapi dengan konfigurasi container produksi yang mengemas **PHP 8.4-FPM, Nginx internal, WebSocket Server, dan Laravel Worker** ke dalam satu container yang diawasi oleh **Supervisor**.
+
+### 1. Struktur Port & Volume
+* **Port Web Host:** `9012` (di-forward ke port internal 80)
+* **WebSocket:** Menggunakan SSL reverse proxy Nginx di endpoint `/ws` (`wss://domainanda.com/ws`)
+* **Volume Persisten:** `qaportal_data` (Database SQLite), `qaportal_storage` (File upload & media), `qaportal_logs` (Log sistem)
+
+### 2. Jalankan Container
 ```bash
-composer require laravel/boost --dev
+cd /var/www/html/portalQA
 
-php artisan boost:install
+# Bangun dan jalankan container di latar belakang
+docker compose up -d --build
+
+# Inisialisasi migrasi & data awal jika pertama kali setup
+docker compose exec app php artisan migrate:fresh --seed
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+### 3. Konfigurasi Host Nginx Reverse Proxy (SSL)
+Salin template konfigurasi dari [`host-nginx-qaportal.conf`](host-nginx-qaportal.conf) ke konfigurasi Nginx server Ubuntu Anda:
 
-## Contributing
+```nginx
+server {
+    server_name poqa.rexensoft.com; # Ganti dengan domain Anda
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+    client_max_body_size 64M;
 
-## Code of Conduct
+    # 1. Forward Web Traffic ke Docker Port 9012
+    location / {
+        proxy_pass http://127.0.0.1:9012;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+    # 2. Forward WebSocket (Team Chat & Live Notifications)
+    location /ws {
+        proxy_pass http://127.0.0.1:9012/ws;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "Upgrade";
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_read_timeout 86400s;
+        proxy_send_timeout 86400s;
+        proxy_buffering off;
+    }
+}
+```
 
-## Security Vulnerabilities
+Reload Nginx:
+```bash
+sudo nginx -t && sudo systemctl reload nginx
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+---
 
-## License
+## 🔑 Akun Default (Seeded)
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Setelah menjalankan `php artisan db:seed` atau `migrate:fresh --seed`, akun berikut siap digunakan:
+
+| Nama Pengguna | Alamat Email | Password | Role Akses |
+|---|---|---|---|
+| **Wahyu Sanjaya** | `wahyu@gmail.com` | `password` | 🛡️ **Administrator** |
+| **Chandra Maulana** | `chandra@gmail.com` | `password` | 👤 QA Member |
+| **Syahril Prasetyo** | `syahril@gmail.com` | `password` | 👤 QA Member |
+| **Abdul Alem** | `alem@gmail.com` | `password` | 👤 QA Member |
+| **Luthfi Rachman** | `luthfi@gmail.com` | `password` | 👤 QA Member |
+
+> ⚠️ **Catatan Keamanan:** Segera ubah password akun-akun di atas pada menu **Settings** setelah melakukan deployment di lingkungan produksi.
+
+---
+
+## 📋 Perintah Pemeliharaan Rutin
+
+* **Melihat log container:**
+  ```bash
+  docker compose logs -f
+  ```
+* **Membersihkan dan mengoptimalkan cache:**
+  ```bash
+  docker compose exec app php artisan optimize:clear
+  docker compose exec app php artisan optimize
+  ```
+* **Memperbarui aplikasi dari git:**
+  ```bash
+  git pull origin main
+  docker compose down
+  docker compose up -d --build
+  docker compose exec app php artisan migrate --force
+  ```
+
+---
+
+## 🏷️ Versioning
+
+Proyek ini menggunakan standar [Semantic Versioning (SemVer)](https://semver.org/).
+* **`v1.0.0`** *(21 Oktober 2026)*: Rilis stabil perdana. Mendukung manajemen pengujian, pelacak bug, WebSocket team chat, manajemen pengguna & role admin, PWA mobile/desktop, serta containerization Docker produksi.
+
+---
+
+## 📄 Lisensi
+
+QA Portal didistribusikan di bawah lisensi terbuka [MIT License](LICENSE).
