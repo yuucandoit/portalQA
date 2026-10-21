@@ -9,8 +9,8 @@ services:
     container_name: qaportal_app
     restart: unless-stopped
     ports:
-      # HTTP port mapped to host (default: 8000, can be reversed-proxied by host Nginx)
-      - "${APP_PORT:-8000}:80"
+      # HTTP port mapped to host (default: 9012, can be reversed-proxied by host Nginx)
+      - "${APP_PORT:-9012}:80"
       # Real-Time WebSocket port mapped to host (default: 6001)
       - "${CHAT_WS_PORT:-6001}:6001"
     env_file:
@@ -18,7 +18,7 @@ services:
     environment:
       - APP_ENV=${APP_ENV:-production}
       - APP_DEBUG=${APP_DEBUG:-false}
-      - APP_URL=${APP_URL:-http://localhost:8000}
+      - APP_URL=${APP_URL:-http://localhost:9012}
       - DB_CONNECTION=${DB_CONNECTION:-sqlite}
       - DB_DATABASE=${DB_DATABASE:-/var/www/html/database/database.sqlite}
       - CHAT_WS_PORT=${CHAT_WS_PORT:-6001}
