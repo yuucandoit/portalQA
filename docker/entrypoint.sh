@@ -3,6 +3,9 @@ set -e
 
 echo "==> [QA Portal] Initializing environment..."
 
+# 0. Clean stale local cache files (e.g. dev service providers like Pail)
+rm -f /var/www/html/bootstrap/cache/*.php
+
 # 1. Essential runtime directories (Crucial for Alpine Nginx & Supervisor)
 mkdir -p /run/nginx /var/log/nginx /var/log/supervisor /run
 

@@ -85,6 +85,9 @@ RUN chmod +x /usr/local/bin/entrypoint.sh
 # Copy application source code
 COPY . /var/www/html
 
+# Clean any copied local cache files
+RUN rm -f /var/www/html/bootstrap/cache/*.php
+
 # Copy pre-built vendor from composer-builder stage
 COPY --from=composer-builder /app/vendor /var/www/html/vendor
 
